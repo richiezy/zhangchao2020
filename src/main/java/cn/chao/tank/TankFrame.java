@@ -1,5 +1,7 @@
 package cn.chao.tank;
 
+import cn.chao.tank.abstractfactory.*;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -9,13 +11,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TankFrame extends Frame {
-    Tank myTank = new Tank(200, 400, Dir.DOWN,Group.GOOD, this);
-    List<Bullet> lists = new ArrayList<>();
-    static final int GAME_WIDTH = 1080, GAME_HEIGHT = 960;
-    public List<Tank> tanks = new ArrayList<>();
-    List<Explode> explodes = new ArrayList<>();
+    private static GameFactory factory = new RectGameFactory();
 
-    Explode e = new Explode(300,300,this);
+    BaseTank myTank = factory.createTank(200, 400, Dir.DOWN, Group.GOOD, this);
+
+    public static GameFactory getFactory() {
+        return factory;
+    }
+
+    public static void setFactory(GameFactory factory) {
+        TankFrame.factory = factory;
+    }
+
+    List<BaseBullet> lists = new ArrayList<>();
+    static final int GAME_WIDTH = 1080, GAME_HEIGHT = 960;
+    public List<BaseTank> tanks = new ArrayList<>();
+    public List<BaseExplode> explodes = new ArrayList<>();
 
     public TankFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -79,7 +90,7 @@ public class TankFrame extends Frame {
                     break;
 
                 case KeyEvent.VK_CONTROL:
-                    myTank.fire();
+                    myTank.fire(new FiveBulletStategy());
                     break;
                 default:
 
@@ -137,22 +148,21 @@ public class TankFrame extends Frame {
             lists.get(i).paint(g);
         }
 
-        for (int i = 0; i <tanks.size() ; i++) {
+        for (int i = 0; i < tanks.size(); i++) {
             tanks.get(i).paint(g);
         }
 
-        for (int i = 0; i <explodes.size() ; i++) {
+        for (int i = 0; i < explodes.size(); i++) {
             explodes.get(i).paint(g);
         }
 
 
-        for (int i = 0; i <lists.size() ; i++) {
-            for (int l = 0; l <tanks.size() ; l++) {
+        for (int i = 0; i < lists.size(); i++) {
+            for (int l = 0; l < tanks.size(); l++) {
 
-                lists.get(i).colligeWith(tanks.get(l));
+                lists.get(i).collideWith(tanks.get(l));
             }
         }
-
 
 
     }

@@ -1,16 +1,17 @@
 package cn.chao.tank;
 
+import cn.chao.tank.abstractfactory.BaseExplode;
+
 import java.awt.*;
 
-public class Explode {
+public class Explode extends BaseExplode {
 
     public static final int WIDTH = ResourceMgr.explodes[0].getWidth(), HEIGHT = ResourceMgr.explodes[0].getHeight();
-    private int x, y;
-    private TankFrame tankFrame;
+    protected int x, y;
+    protected TankFrame tankFrame;
 
 
-
-    private int step = 0;
+    protected int step = 0;
 
     public Explode(int x, int y, TankFrame tankFrame) {
         this.x = x;

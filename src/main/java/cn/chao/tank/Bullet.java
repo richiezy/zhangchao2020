@@ -1,8 +1,11 @@
 package cn.chao.tank;
 
+import cn.chao.tank.abstractfactory.BaseBullet;
+import cn.chao.tank.abstractfactory.BaseTank;
+
 import java.awt.*;
 
-public class Bullet {
+public class Bullet extends BaseBullet {
     private static final int SPEED = 10;
     public static final int WIDTH = ResourceMgr.bulletD.getWidth(), HEIGHT = ResourceMgr.bulletD.getHeight();
     private Dir dir;
@@ -32,6 +35,7 @@ public class Bullet {
         rectangle.y = this.y;
         rectangle.width = WIDTH;
         rectangle.height = HEIGHT;
+        tankFrame.lists.add(this);
     }
 
     public void paint(Graphics g) {
@@ -63,6 +67,21 @@ public class Bullet {
 
     }
 
+    @Override
+    public void collideWith(BaseTank tank) {
+        if(this.group == tank.getGroup()) return;
+
+        if(this.rectangle.intersects(tank.getRect())){
+            tank.die();
+            this.die();
+
+            int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
+            int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
+
+            tankFrame.explodes.add(tankFrame.getFactory().createExplode(ex,ey,tankFrame));
+        }
+    }
+
 
     private void move() {
 
@@ -91,17 +110,17 @@ public class Bullet {
         rectangle.y = y;
     }
 
-    public void colligeWith(Tank tank) {
+    public void colligeWith(BaseTank tank) {
         if(this.group == tank.getGroup()) return;
 
-        if(this.rectangle.intersects(tank.rectangle)){
+        if(this.rectangle.intersects(tank.getRect())){
             tank.die();
             this.die();
 
             int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
 
-            tankFrame.explodes.add(new Explode(ex,ey,tankFrame));
+            tankFrame.explodes.add(tankFrame.getFactory().createExplode(ex,ey,tankFrame));
         }
 
     }
