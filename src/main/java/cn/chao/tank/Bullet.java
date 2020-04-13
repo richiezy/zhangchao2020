@@ -2,6 +2,7 @@ package cn.chao.tank;
 
 import cn.chao.tank.abstractfactory.BaseBullet;
 import cn.chao.tank.abstractfactory.BaseTank;
+import cn.chao.tank.facade.GameModel;
 
 import java.awt.*;
 
@@ -10,12 +11,13 @@ public class Bullet extends BaseBullet {
     public static final int WIDTH = ResourceMgr.bulletD.getWidth(), HEIGHT = ResourceMgr.bulletD.getHeight();
     private Dir dir;
     private int x, y;
-    private TankFrame  tankFrame;
+    private TankFrame tankFrame;
 
     private Group group;
 
     private boolean living = true;
     Rectangle rectangle = new Rectangle();
+
     public Group getGroup() {
         return group;
     }
@@ -24,7 +26,7 @@ public class Bullet extends BaseBullet {
         this.group = group;
     }
 
-    public Bullet(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
+    public Bullet(int x, int y, Dir dir, Group group) {
         this.dir = dir;
         this.x = x;
         this.y = y;
@@ -35,12 +37,12 @@ public class Bullet extends BaseBullet {
         rectangle.y = this.y;
         rectangle.width = WIDTH;
         rectangle.height = HEIGHT;
-        tankFrame.lists.add(this);
+        GameModel.getInstance().bullets.add(this);
     }
 
     public void paint(Graphics g) {
-        if(!living){
-            tankFrame.lists.remove(this);
+        if (!living) {
+            GameModel.getInstance().bullets.remove(this);
         }
 
         switch (dir) {
@@ -69,16 +71,16 @@ public class Bullet extends BaseBullet {
 
     @Override
     public void collideWith(BaseTank tank) {
-        if(this.group == tank.getGroup()) return;
+        if (this.group == tank.getGroup()) return;
 
-        if(this.rectangle.intersects(tank.getRect())){
+        if (this.rectangle.intersects(tank.getRect())) {
             tank.die();
             this.die();
 
             int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
 
-            tankFrame.explodes.add(tankFrame.getFactory().createExplode(ex,ey,tankFrame));
+            GameModel.getInstance().explodes.add(GameModel.getInstance().factory.createExplode(ex, ey));
         }
     }
 
@@ -103,7 +105,7 @@ public class Bullet extends BaseBullet {
         }
 
 
-        if(x<0 || y< 0 ||x> TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT){
+        if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
             living = false;
         }
         rectangle.x = x;
@@ -111,16 +113,16 @@ public class Bullet extends BaseBullet {
     }
 
     public void colligeWith(BaseTank tank) {
-        if(this.group == tank.getGroup()) return;
+        if (this.group == tank.getGroup()) return;
 
-        if(this.rectangle.intersects(tank.getRect())){
+        if (this.rectangle.intersects(tank.getRect())) {
             tank.die();
             this.die();
 
             int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
 
-            tankFrame.explodes.add(tankFrame.getFactory().createExplode(ex,ey,tankFrame));
+            GameModel.getInstance().explodes.add(GameModel.getInstance().factory.createExplode(ex, ey));
         }
 
     }

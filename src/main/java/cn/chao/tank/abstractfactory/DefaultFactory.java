@@ -4,17 +4,17 @@ import cn.chao.tank.*;
 
 public class DefaultFactory extends  GameFactory {
     @Override
-    public BaseTank createTank(int x, int y, Dir dir, Group group, TankFrame tf) {
-        return new Tank(x,y,dir,group,tf);
+    public BaseTank createTank(int x, int y, Dir dir, Group group) {
+        return new Tank(x,y,dir,group);
     }
 
     @Override
-    public BaseBullet createBullet(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
-        return new Bullet(x,y,dir,group,tankFrame);
+    public BaseBullet createBullet(int x, int y, Dir dir, Group group) {
+        return new Bullet(x,y,dir,group);
     }
 
     @Override
-    public BaseExplode createExplode(int x, int y, TankFrame tankFrame) {
-        return new Explode(x,y,tankFrame);
+    public BaseExplode createExplode(int x, int y) {
+        return new Explode(x,y);
     }
 }

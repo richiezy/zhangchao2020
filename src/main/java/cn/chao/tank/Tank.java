@@ -1,6 +1,7 @@
 package cn.chao.tank;
 
 import cn.chao.tank.abstractfactory.BaseTank;
+import cn.chao.tank.facade.GameModel;
 import cn.chao.tank.strage.DefaultFirStategy;
 import cn.chao.tank.strage.FireStrategy;
 
@@ -14,11 +15,11 @@ public class Tank extends BaseTank {
     private static final int SPEED = 5;
     public static final int WIDTH = ResourceMgr.goodTankD.getWidth(), HEIGHT = ResourceMgr.goodTankD.getHeight();
     private Random random = new Random();
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
+
+    public Tank(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tf = tf;
         this.group = group;
         rect.x = this.x;
         rect.y = this.y;
@@ -29,7 +30,7 @@ public class Tank extends BaseTank {
 
     public void paint(Graphics g) {
         if (!living) {
-            tf.tanks.remove(this);
+            GameModel.getInstance().tanks.remove(this);
         }
         switch (dir) {
             case DOWN:
@@ -58,6 +59,7 @@ public class Tank extends BaseTank {
     public void fire(FireStrategy strategy) {
         strategy.fire(this);
     }
+
     private void move() {
         if (!moving) return;
 

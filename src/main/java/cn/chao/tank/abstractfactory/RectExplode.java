@@ -1,15 +1,15 @@
 package cn.chao.tank.abstractfactory;
 
 import cn.chao.tank.TankFrame;
+import cn.chao.tank.facade.GameModel;
 
 import java.awt.*;
 
 public class RectExplode extends  BaseExplode {
 
-    public RectExplode(int x, int y, TankFrame tankFrame) {
+    public RectExplode(int x, int y) {
         this.x = x;
         this.y = y;
-        this.tankFrame = tankFrame;
     }
 
     @Override
@@ -19,9 +19,7 @@ public class RectExplode extends  BaseExplode {
         g.fillRect(x, y, 10*step, 10*step);
         step++;
         if (step >= 15)
-            tankFrame.explodes.remove(this);
-
-
+            GameModel.getInstance().explodes.remove(this);
        g.setColor(c);
     }
 }

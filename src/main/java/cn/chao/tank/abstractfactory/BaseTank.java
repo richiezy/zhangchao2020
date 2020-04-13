@@ -23,17 +23,6 @@ public abstract class BaseTank {
 
     public Group group = Group.BAD;
     protected Rectangle rect = new Rectangle();
-
-    public TankFrame getTf() {
-        return tf;
-    }
-
-    protected TankFrame tf;
-
-    public void setTf(TankFrame tf) {
-        this.tf = tf;
-    }
-
     public int getX() {
         return x;
     }

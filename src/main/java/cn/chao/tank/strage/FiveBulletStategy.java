@@ -4,6 +4,7 @@ import cn.chao.tank.Bullet;
 import cn.chao.tank.Dir;
 import cn.chao.tank.Tank;
 import cn.chao.tank.abstractfactory.BaseTank;
+import cn.chao.tank.facade.GameModel;
 
 public class FiveBulletStategy implements FireStrategy {
   /*  public List<Bullet> getBullet(Tank tank) {
@@ -25,7 +26,7 @@ public class FiveBulletStategy implements FireStrategy {
         Dir[] values = Dir.values();
         for (Dir dir : values
         ) {
-            tank.getTf().getFactory().createBullet(bx, by, dir, tank.getGroup(), tank.getTf());
+            GameModel.getInstance().factory.createBullet(bx, by, dir, tank.getGroup());
 //            new Bullet(bx, by, dir, tank.getGroup(), tank.getTf());
         }
 
