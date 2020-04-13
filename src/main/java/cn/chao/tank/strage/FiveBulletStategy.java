@@ -1,9 +1,9 @@
-package cn.chao.tank;
+package cn.chao.tank.strage;
 
+import cn.chao.tank.Bullet;
+import cn.chao.tank.Dir;
+import cn.chao.tank.Tank;
 import cn.chao.tank.abstractfactory.BaseTank;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class FiveBulletStategy implements FireStrategy {
   /*  public List<Bullet> getBullet(Tank tank) {

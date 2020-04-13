@@ -1,4 +1,4 @@
-package cn.chao.tank;
+package cn.chao.tank.strage;
 
 import cn.chao.tank.abstractfactory.BaseTank;
 

@@ -1,5 +1,7 @@
-package cn.chao.tank;
+package cn.chao.tank.strage;
 
+import cn.chao.tank.Bullet;
+import cn.chao.tank.Tank;
 import cn.chao.tank.abstractfactory.BaseTank;
 
 public class DefaultFirStategy implements FireStrategy {

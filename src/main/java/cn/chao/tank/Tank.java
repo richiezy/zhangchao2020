@@ -1,6 +1,8 @@
 package cn.chao.tank;
 
 import cn.chao.tank.abstractfactory.BaseTank;
+import cn.chao.tank.strage.DefaultFirStategy;
+import cn.chao.tank.strage.FireStrategy;
 
 import java.awt.*;
 import java.util.Random;

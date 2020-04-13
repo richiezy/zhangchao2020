@@ -1,6 +1,7 @@
 package cn.chao.tank;
 
 import cn.chao.tank.abstractfactory.*;
+import cn.chao.tank.strage.FiveBulletStategy;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;

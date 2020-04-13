@@ -1,7 +1,7 @@
 package cn.chao.tank.abstractfactory;
 
 import cn.chao.tank.Dir;
-import cn.chao.tank.FireStrategy;
+import cn.chao.tank.strage.FireStrategy;
 import cn.chao.tank.Group;
 import cn.chao.tank.TankFrame;
 
