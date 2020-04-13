@@ -37,12 +37,12 @@ public class Bullet extends BaseBullet {
         rectangle.y = this.y;
         rectangle.width = WIDTH;
         rectangle.height = HEIGHT;
-        GameModel.getInstance().bullets.add(this);
+        GameModel.getInstance().add(this);
     }
 
     public void paint(Graphics g) {
         if (!living) {
-            GameModel.getInstance().bullets.remove(this);
+            GameModel.getInstance().remove(this);
         }
 
         switch (dir) {
@@ -80,7 +80,7 @@ public class Bullet extends BaseBullet {
             int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
 
-            GameModel.getInstance().explodes.add(GameModel.getInstance().factory.createExplode(ex, ey));
+            GameModel.getInstance().add(GameModel.getInstance().factory.createExplode(ex, ey));
         }
     }
 
@@ -122,7 +122,7 @@ public class Bullet extends BaseBullet {
             int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
 
-            GameModel.getInstance().explodes.add(GameModel.getInstance().factory.createExplode(ex, ey));
+            GameModel.getInstance().add(GameModel.getInstance().factory.createExplode(ex, ey));
         }
 
     }

@@ -19,7 +19,7 @@ public class RectExplode extends  BaseExplode {
         g.fillRect(x, y, 10*step, 10*step);
         step++;
         if (step >= 15)
-            GameModel.getInstance().explodes.remove(this);
+            GameModel.getInstance().remove(this);
        g.setColor(c);
     }
 }

@@ -30,7 +30,7 @@ public class Tank extends BaseTank {
 
     public void paint(Graphics g) {
         if (!living) {
-            GameModel.getInstance().tanks.remove(this);
+            GameModel.getInstance().remove(this);
         }
         switch (dir) {
             case DOWN:

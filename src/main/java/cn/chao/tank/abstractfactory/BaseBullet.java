@@ -1,9 +1,9 @@
 package cn.chao.tank.abstractfactory;
 
-import java.awt.*;
+import cn.chao.tank.facade.GameObject;
 
-public abstract class BaseBullet {
-    public abstract void paint(Graphics g);
+
+public abstract class BaseBullet extends GameObject {
 
     public abstract void collideWith(BaseTank tank);
 }
