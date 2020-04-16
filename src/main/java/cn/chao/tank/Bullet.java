@@ -10,27 +10,12 @@ public class Bullet extends BaseBullet {
     private static final int SPEED = 10;
     public static final int WIDTH = ResourceMgr.bulletD.getWidth(), HEIGHT = ResourceMgr.bulletD.getHeight();
     private Dir dir;
-    private int x, y;
-    private TankFrame tankFrame;
 
-    private Group group;
-
-    private boolean living = true;
-    Rectangle rectangle = new Rectangle();
-
-    public Group getGroup() {
-        return group;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
-    }
 
     public Bullet(int x, int y, Dir dir, Group group) {
         this.dir = dir;
         this.x = x;
         this.y = y;
-        this.tankFrame = tankFrame;
         this.group = group;
 
         rectangle.x = this.x;
@@ -70,8 +55,8 @@ public class Bullet extends BaseBullet {
     }
 
     @Override
-    public void collideWith(BaseTank tank) {
-        if (this.group == tank.getGroup()) return;
+    public boolean collideWith(BaseTank tank) {
+        if (this.group == tank.getGroup()) return true;
 
         if (this.rectangle.intersects(tank.getRect())) {
             tank.die();
@@ -82,6 +67,7 @@ public class Bullet extends BaseBullet {
 
             GameModel.getInstance().add(GameModel.getInstance().factory.createExplode(ex, ey));
         }
+        return false;
     }
 
 
@@ -127,7 +113,5 @@ public class Bullet extends BaseBullet {
 
     }
 
-    private void die() {
-        this.living = false;
-    }
+
 }
