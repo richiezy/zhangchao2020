@@ -19,8 +19,8 @@ public class Tank extends BaseTank {
         this.y = y;
         this.dir = dir;
         this.group = group;
-        rect.x = this.x;
-        rect.y = this.y;
+        rect.x = x;
+        rect.y = y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
     }

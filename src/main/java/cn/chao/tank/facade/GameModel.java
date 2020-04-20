@@ -1,11 +1,7 @@
 package cn.chao.tank.facade;
 
-import cn.chao.tank.Dir;
-import cn.chao.tank.Group;
-import cn.chao.tank.PropertyMgr;
-import cn.chao.tank.Tank;
+import cn.chao.tank.*;
 import cn.chao.tank.abstractfactory.*;
-import cn.chao.tank.chain.Collider;
 import cn.chao.tank.chain.ColliderChain;
 
 import java.awt.*;
@@ -20,10 +16,17 @@ public class GameModel {
 
     private GameModel() {
         myTank = factory.createTank(200, 400, Dir.DOWN, Group.GOOD);
+        add(myTank);
         int initCount = Integer.parseInt(PropertyMgr.get("initTankCount"));
         for (int i = 0; i < initCount; i++) {
-            add(new Tank(100 + i * 70, 100 + i * 70, Dir.DOWN, Group.BAD));
+            add(factory.createTank(100 + i * 100, 200, Dir.DOWN, Group.BAD));
         }
+
+        // 初始化墙
+        add(new Wall(150, 150, 200, 50));
+        add(new Wall(550, 150, 200, 50));
+        add(new Wall(300, 300, 50, 200));
+        add(new Wall(550, 300, 50, 200));
     }
 
     public static GameModel getInstance() {
@@ -49,14 +52,12 @@ public class GameModel {
 
     public void paint(Graphics g) {
 
-        myTank.paint(g);
-
         for (int i = 0; i < gos.size(); i++) {
             gos.get(i).paint(g);
         }
 
         for (int i = 0; i < gos.size() - 1; i++) {
-            for (int j = 1; j < gos.size(); j++) {
+            for (int j = i+1; j < gos.size(); j++) {
                 chains.collide(gos.get(i), gos.get(j));
             }
 

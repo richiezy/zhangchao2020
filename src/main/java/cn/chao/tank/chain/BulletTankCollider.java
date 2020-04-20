@@ -14,10 +14,18 @@ public class BulletTankCollider implements Collider {
 
 
         if (o1 instanceof BaseBullet && o2 instanceof BaseTank) {
-            BaseBullet b = (BaseBullet) o1;
-            BaseTank t = (BaseTank) o2;
-            //TODO copy code from method collideWith
-            if (b.collideWith(t)) {
+            BaseBullet bullet = (BaseBullet) o1;
+            BaseTank tank = (BaseTank) o2;
+            if (bullet.getGroup() == tank.getGroup()) return true;
+
+            if (bullet.getRectangle().intersects(tank.getRect())) {
+                tank.die();
+                bullet.die();
+
+                int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
+                int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
+
+                GameModel.getInstance().add(GameModel.getInstance().factory.createExplode(ex, ey));
                 return false;
             }
 
@@ -42,6 +50,6 @@ public class BulletTankCollider implements Collider {
 
             GameModel.getInstance().add(GameModel.getInstance().factory.createExplode(ex, ey));
         }
-        return false;
+        return true;
     }
 }

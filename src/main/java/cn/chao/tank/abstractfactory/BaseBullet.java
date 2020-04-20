@@ -14,9 +14,6 @@ public abstract class BaseBullet extends GameObject {
     public Rectangle getRectangle() {
         return rectangle;
     }
-
-    public abstract boolean collideWith(BaseTank tank);
-
     public Group getGroup() {
         return group;
     }

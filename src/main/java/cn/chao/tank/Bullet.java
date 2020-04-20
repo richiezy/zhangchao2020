@@ -54,21 +54,6 @@ public class Bullet extends BaseBullet {
 
     }
 
-    @Override
-    public boolean collideWith(BaseTank tank) {
-        if (this.group == tank.getGroup()) return true;
-
-        if (this.rectangle.intersects(tank.getRect())) {
-            tank.die();
-            this.die();
-
-            int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
-            int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-
-            GameModel.getInstance().add(GameModel.getInstance().factory.createExplode(ex, ey));
-        }
-        return false;
-    }
 
 
     private void move() {

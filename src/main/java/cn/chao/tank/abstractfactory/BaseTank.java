@@ -96,7 +96,7 @@ public abstract class BaseTank extends GameObject {
                 break;
         }
 
-        if (this.group == Group.BAD && random.nextInt(100) > 95) {
+        if (this.group == Group.BAD && random.nextInt(100) > 98) {
             this.fire(DefaultFirStategy.getInstance());
         }
 
